@@ -1,0 +1,29 @@
+#+TITLE: Distribution of points on the surface of the sphere
+#+SUBTITLE: A self-study case to code develoment, documantation and Git.
+#+AUTHOR: Baudilio Tejerina
+
+* Introduction
+
+  This project is merely intended to learn and practice software development techniques using Git
+  version control and Github services.
+
+  The project consists in the classic distribution of points on the surface of a sphere. References will be provided.
+
+  I will use Fortran 90 as programming language with the editor Emacs.
+
+
+* Emacs
+
+** The directory local variables
+
+
+* Code
+
+  See file Git
+
+
+* Download
+
+* Use
+
+* Reference
