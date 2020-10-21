@@ -18,9 +18,19 @@
 ** The directory local variables
 
 
-* Code
+* Directory structure of the project
 
-  See file Git
+ The CWD, which is a git repositor, and two subdirectories: prog/ and lib/
+ In addition CWD contains .git/, .dir-locals.el, .gitignore, README.org (this file), README.md
+
+ For CMake, I've added the file [[file:CMakeLists.txt][CMakeLists.txt]]
+
+ prog/ contains the source code, main.f90 and another [[file:prog/CMakeLists.txt][file:~/spheres/prog/CMakeLists.txt]]
+ lib/ contains its own [[file:lib/CMakeLists.txt][CMakeLists.txt]] and code that constitute the library of the project.
+
+* CMake
+
+  With this structure
 
 
 * Download
