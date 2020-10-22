@@ -159,3 +159,71 @@ contains
 
   end subroutine JORourke
 end module bta
+
+
+MODULE bta1
+  USE spheretypes, ONLY: wp => SP, nodes => snode, pi => sPI
+  implicit none
+
+contains
+  SUBROUTINE alea(n, node)
+    implicit none
+    ! -- Dummy args
+    integer, Intent(in) :: n
+    Type(Nodes), Dimension(n), Intent(out) :: node
+
+
+    ! -- Local Variables
+    integer :: i
+    REAL(wp) :: theta, phi
+
+    ! ---
+
+    DO i = 1, N
+       CALL Random_NUMBER(theta)
+       CALL Random_NUMBER(phi)
+       theta = theta * pi
+       phi = 2*pi*phi
+       node(i)%x = COS(phi)*SIN(theta)
+       node(i)%y = SIN(phi)*SIN(theta)
+       node(i)%z = COS(theta)
+    end do
+
+  END SUBROUTINE Alea
+
+  SUBROUTINE alea2(n, node)
+    implicit none
+    ! -- Dummy args
+    integer, Intent(in) :: n
+    Type(Nodes), Dimension(n), Intent(out) :: node
+
+
+    ! -- Local Variables
+    integer :: i
+    REAL(wp) :: x,y,z
+    REAL(wp) :: d
+    ! ---
+
+    DO i = 1, N
+       CALL Random_NUMBER(x)
+       CALL Random_NUMBER(y)
+       CALL Random_NUMBER(z)
+       x = 2*x-1
+       y = 2*y-1
+       z = 2*z-1
+       d = distance(x,y,z)
+       node(i)%x = x/d
+       node(i)%y = y/d
+       node(i)%z = z/d
+    end do
+
+
+  END SUBROUTINE Alea2
+
+  REAL(wp) FUNCTION distance(x,y,z)
+    IMPLICIT NONE
+    REAL(wp), INTENT(in) :: x,y,z
+    distance = SQRT(x*x+y*y+z*z)
+  END FUNCTION distance
+
+END MODULE bta1
