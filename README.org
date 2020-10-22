@@ -35,6 +35,20 @@
 
 * Download
 
+* Algorithms
+
+  1. StaffKujilaars
+  2. Fibonacci
+  3. J.O. Rouke
+  4. Alearoty
+
+	 The results are written in .xyz
+     files that can be visualized with
+     the molecular visualization tool
+     JMol
+
 * Use
 
 * Reference
+
+ BTA: Algorithms are from http://web.archive.org/web/20120421191837/http://cgafaq.info/wiki/Evenly_distributed_points_on_sphere
