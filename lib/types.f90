@@ -56,3 +56,51 @@ contains
   end subroutine staffKujilaars
 
 end Module algo
+
+Module fibonacci
+  ! https://www.openprocessing.org/sketch/41142
+  USE spheretypes, ONLY: wp => SP, nodes => snode, pi => sPI
+  implicit none
+
+contains
+  subroutine Sphere(samples, randomize, node)
+    implicit none
+    !-- Dummy parameters
+    integer, intent(in) :: samples
+    logical, intent(in) :: randomize
+    Type(nodes), Dimension(samples), Intent(out) :: node
+
+    ! -- Local variables
+    real(wp), Parameter :: increment = pi * (3.0 - sqrt(5.0_wp))
+    real(wp) :: offset
+    real(wp) :: phi, r
+    real(wp) :: x, y, z
+    real(wp) :: rnd = 1.0_wp
+    integer :: i
+
+
+    ! ---
+    offset = 2.0_wp/samples
+
+    if (randomize) then
+      call random_number(rnd)
+      rnd = rnd * samples
+    end if
+
+    do i = 0, samples-1
+      y = (i * offset) - 1.0 + (offset / 2.0)
+      r = sqrt(1.0 - y * y)
+
+      phi = increment * MOD(i + rnd, Real(samples,wp))
+
+      x = r * cos(phi)
+      z = r * sin(phi)
+
+      node(i+1)%x = x
+      node(i+1)%y = y
+      node(i+1)%z = z
+
+    end do
+  end subroutine Sphere
+
+end Module fibonacci
