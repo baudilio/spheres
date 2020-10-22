@@ -104,3 +104,58 @@ contains
   end subroutine Sphere
 
 end Module fibonacci
+
+MODULE bta
+!! @article{ORourke1997,
+!  title={Computational Geometry Column 31},
+!  author={Joseph O'Rourke},
+!  journal={SIGACT News},
+!  year={1997},
+!  volume={28},
+!  pages={20-23}
+!}
+
+!  @book{10.5555/521378,
+!author = {O’Rourke, Joseph},
+!title = {Computational Geometry in C},
+!year = {1998},
+!isbn = {0521640105},
+!publisher = {Cambridge University Press},
+!address = {USA},
+!edition = {2nd}
+!}
+  USE spheretypes, ONLY: wp => SP, nodes => snode, pi => sPI
+  implicit none
+
+contains
+  subroutine JORourke(n, node)
+    implicit none
+    ! -- Dummy args
+    integer, Intent(in) :: n
+    Type(Nodes), Dimension(n), Intent(out) :: node
+
+
+    ! -- Local Variables
+    Real(WP), Parameter :: dl = pi * (3 - sqrt(5.0_wp))
+    real(wp) :: long = 0.0_wp
+    Real(wp) :: z, dz
+    Real(wp) :: r
+    integer :: k
+
+    ! ---
+
+    dz = 2.0_wp / N
+    z  = 1.0_wp - dz/2.0
+
+    do k = 1, N
+      r = sqrt(1.0_wp - z*z)
+      ! r = 1.0_wp ! Cylinder
+      node(k)%x = r*cos(long)
+      node(k)%y = r*sin(long)
+      node(k)%z = z
+      z = z - dz
+      long = long + dl
+    end do
+
+  end subroutine JORourke
+end module bta

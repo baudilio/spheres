@@ -1,7 +1,8 @@
 PROGRAM main
   USE spheretypes, ONLY : PI => sPi, node => snode
   USE algo, ONLY : staffKujilaars
-  Use Fibonacci, only : Sphere
+  USE Fibonacci, ONLY : Sphere
+  USE bta, ONLY : JORourke
   IMPLICIT NONE
 
   ! -- Local variables
@@ -27,6 +28,16 @@ PROGRAM main
 !  print "('H ',3F9.5)", node
   OPEN(Newunit=ilun, FILE="fibonacci.xyz", Action="Write")
   WRITE(ilun, FMT='(I5/"Fibonacci")') n
+  WRITE(ilun, FMT=100) nodes
+  CLOSE(ilun)
+
+  ! - J.O. Rourke
+    Call JORourke(n, nodes)
+  !print '(I5/"JOrourke")', N
+  !print "('H ',3F9.5)", node
+  OPEN(Newunit=ilun, FILE="JORouke.xyz", Action="Write")
+  !WRITE(ilun, FMT="('H ', 3F9.5)") node
+  WRITE(ilun, FMT='(I5/"JORuouke")') n
   WRITE(ilun, FMT=100) nodes
   CLOSE(ilun)
 
