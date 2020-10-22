@@ -30,8 +30,17 @@
 
 * CMake
 
-  With this structure
+  $> cmake .
+  $> make
+  $> prog/example
 
+  In leon, I need to specify the compiler, gfortran, explicitly:
+  $> module load cmake
+  $> cmake -DCMAKE_Fortran_COMPILER=gfortran  .
+
+  BTA: see also
+
+  $> ccmake .
 
 * Download
 
