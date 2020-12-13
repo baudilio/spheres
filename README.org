@@ -32,7 +32,7 @@
 
   $> cmake .
   $> make
-  $> prog/example
+  $> prog/example.x
 
   In leon, I need to specify the compiler, gfortran, explicitly:
   $> module load cmake

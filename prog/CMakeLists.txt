@@ -5,6 +5,6 @@
 
 include_directories(${CMAKE_BINARY_DIR}/lib)
 
-add_executable(example main.f90)
+add_executable(example.x main.f90)
 
-target_link_libraries(example lib)
+target_link_libraries(example.x lib)

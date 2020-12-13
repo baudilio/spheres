@@ -20,3 +20,8 @@ lib/cmake_install.cmake
 prog/CMakeFiles/
 prog/Makefile
 prog/cmake_install.cmake
+
+# module, libs and binary executables
+*.mod
+*.a
+*.x
