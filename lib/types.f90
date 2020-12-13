@@ -164,8 +164,11 @@ end module bta
 MODULE bta1
   USE spheretypes, ONLY: wp => SP, nodes => snode, pi => sPI
   implicit none
+  PRIVATE
+  PUBLIC :: alea, alea2, sobol
 
-contains
+CONTAINS
+
   SUBROUTINE alea(n, node)
     implicit none
     ! -- Dummy args
@@ -225,5 +228,30 @@ contains
     REAL(wp), INTENT(in) :: x,y,z
     distance = SQRT(x*x+y*y+z*z)
   END FUNCTION distance
+
+  SUBROUTINE sobol(n, node)
+    IMPLICIT NONE
+    ! -- Dummy args
+    integer, Intent(in) :: n
+    TYPE(Nodes), DIMENSION(n), INTENT(out) :: node
+
+    ! -- Local variables
+    INTEGER :: i
+    REAL(wp) :: u, v
+    REAL(wp) :: phi, sin_theta, cos_theta
+
+    ! ---
+    DO i = 1, N
+       CALL Random_NUMBER(u)
+       CALL Random_NUMBER(v)
+       cos_theta = 2*u - 1
+       sin_theta = SQRT(1 - cos_theta**2)
+       phi = 2*pi*v
+       node(i)%x = COS(phi)*SIN_theta
+       node(i)%y = SIN(phi)*SIN_theta
+       node(i)%z = COS_theta
+    end do
+
+  END SUBROUTINE sobol
 
 END MODULE bta1

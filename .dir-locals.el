@@ -3,7 +3,7 @@
 ;;; eval the following LISP expression (info "(emacs) Directory Variables")
 
 
-((nil . ((indent-tabs-mode . t)(fill-column . 40) (tab-width . 4)))
+((nil . ((indent-tabs-mode . nil)(fill-column . 40) (tab-width . 4)))
       (f90-mode . ((fill-column . 80) (f90-do-indent . 3) (f90-auto-keyword-case . upcase-word)))
       (prog-mode . ((fill-column . 60)))
       (compile-command . cmake)

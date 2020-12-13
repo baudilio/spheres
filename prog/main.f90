@@ -3,7 +3,7 @@ PROGRAM main
   USE algo, ONLY : staffKujilaars
   USE Fibonacci, ONLY : Sphere
   USE bta, ONLY : JORourke
-  USE bta1, ONLY : alea, alea2
+  USE bta1, ONLY : alea, alea2, sobol
   IMPLICIT NONE
 
   ! -- Local variables
@@ -46,6 +46,13 @@ PROGRAM main
   CALL Alea2(N, nodes)
   OPEN(Newunit=ilun, FILE="alea.xyz", Action="Write")
   WRITE(ilun, FMT='(I5/"Aleatory")') n
+  WRITE(ilun, FMT=100) nodes
+  CLOSE(ilun)
+
+  ! - BTA Sobol distribution method
+  CALL Sobol(N, nodes)
+  OPEN(Newunit=ilun, FILE="sobol.xyz", Action="Write")
+  WRITE(ilun, FMT='(I5/"Ilya M. Sobol")') n
   WRITE(ilun, FMT=100) nodes
   CLOSE(ilun)
 

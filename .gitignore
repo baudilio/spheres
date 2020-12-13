@@ -25,3 +25,6 @@ prog/cmake_install.cmake
 *.mod
 *.a
 *.x
+
+# Exclude the output files
+*.xyz
