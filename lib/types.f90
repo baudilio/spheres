@@ -229,7 +229,11 @@ CONTAINS
     distance = SQRT(x*x+y*y+z*z)
   END FUNCTION distance
 
+
   SUBROUTINE sobol(n, node)
+    !@Book{sobolʹ1994a, author = {Sobolʹ, I. M.}, title = {A primer for the
+    !Monte Carlo method}, publisher = {CRC Press}, year = {1994}, address =
+    !{Boca Raton}, isbn = {084938673x} }
     IMPLICIT NONE
     ! -- Dummy args
     integer, Intent(in) :: n
