@@ -8,7 +8,7 @@ PROGRAM main
 
   ! -- Local variables
 
-  INTEGER, PARAMETER :: N = 128
+  INTEGER, PARAMETER :: N = 256
   LOGICAL :: aleatory = .TRUE.
   TYPE(node), DIMENSION(N) :: nodes
   INTEGER :: ilun

@@ -134,9 +134,8 @@ contains
     integer, Intent(in) :: n
     Type(Nodes), Dimension(n), Intent(out) :: node
 
-
     ! -- Local Variables
-    Real(WP), Parameter :: dl = pi * (3 - sqrt(5.0_wp))
+    Real(WP), Parameter :: dl = 2.39996322973_wp ! pi * (3 - sqrt(5.0_wp))
     real(wp) :: long = 0.0_wp
     Real(wp) :: z, dz
     Real(wp) :: r
