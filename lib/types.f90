@@ -164,7 +164,7 @@ MODULE bta1
   USE spheretypes, ONLY: wp => SP, nodes => snode, pi => sPI
   implicit none
   PRIVATE
-  PUBLIC :: alea, alea2, sobol
+  PUBLIC :: alea, alea2, alea3, sobol
 
 CONTAINS
 
@@ -221,6 +221,36 @@ CONTAINS
 
 
   END SUBROUTINE Alea2
+
+  SUBROUTINE alea3(n, node)
+    implicit none
+    ! -- Dummy args
+    integer, Intent(in) :: n
+    Type(Nodes), Dimension(n), Intent(out) :: node
+
+
+    ! -- Local Variables
+    integer :: i
+    REAL(wp) :: x,y,z
+    REAL(wp) :: d
+    REAL(wp), PARAMETER :: r = 2.11230702051_wp
+
+    ! ---
+
+    DO i = 1, N
+       CALL Random_NUMBER(x)
+       CALL Random_NUMBER(y)
+       CALL Random_NUMBER(z)
+       x = 2*x-1
+       y = 2*y-1
+       z = 2*z-1
+       d = r / distance(x,y,z)
+       node(i)%x = x*d
+       node(i)%y = y*d
+       node(i)%z = z*d
+    end do
+
+  END SUBROUTINE Alea3
 
   REAL(wp) FUNCTION distance(x,y,z)
     IMPLICIT NONE

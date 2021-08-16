@@ -3,7 +3,7 @@ PROGRAM main
   USE algo, ONLY : staffKujilaars
   USE Fibonacci, ONLY : Sphere
   USE bta, ONLY : JORourke
-  USE bta1, ONLY : alea, alea2, sobol
+  USE bta1, ONLY : alea, alea2, alea3, sobol
   IMPLICIT NONE
 
   ! -- Local variables
@@ -45,6 +45,13 @@ PROGRAM main
   ! - BTA aleatory distribution method
   CALL Alea2(N, nodes)
   OPEN(Newunit=ilun, FILE="alea.xyz", Action="Write")
+  WRITE(ilun, FMT='(I5/"Aleatory")') n
+  WRITE(ilun, FMT=100) nodes
+  CLOSE(ilun)
+
+  ! - BTA aleatory distribution method
+  CALL Alea3(N, nodes)
+  OPEN(Newunit=ilun, FILE="alea3.xyz", Action="Write")
   WRITE(ilun, FMT='(I5/"Aleatory")') n
   WRITE(ilun, FMT=100) nodes
   CLOSE(ilun)
