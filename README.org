@@ -90,11 +90,24 @@ $> jmol alea3.xyz
        points on the surface of the
        sphere.
 
-     - alea4 :: TODO: (phi, theta) plus
+     - alea4 :: (phi, theta) plus
        the Jacobian of change of the
-       coordinates.
+       coordinates. This is Sobol's methods.
 
-     - sobol :: Sobol's method.
+     - sobol :: Sobol's method. See page
+       79 of the reference book, and
+       eq. 3.9 and 3.10 on page 80.
+
+       #+begin_src bibtex
+@Book{sobol1994a,
+title = {A primer for the Monte Carlo method},
+author = {Sobol', I. M.},
+publisher = {CRC Press},
+address = {Boca Raton},
+year = {1994},
+isbn = {084938673x},
+}
+       #+end_src
 
 The results are written in .xyz files
      that can be visualized with the

@@ -233,7 +233,7 @@ CONTAINS
     integer :: i
     REAL(wp) :: x,y,z
     REAL(wp) :: d
-    REAL(wp), PARAMETER :: r = 2.11230702051_wp
+    REAL(wp), PARAMETER :: r = 2.11230702051_wp ! (3*pi)^(1/3)
 
     ! ---
 
@@ -258,20 +258,19 @@ CONTAINS
     distance = SQRT(x*x+y*y+z*z)
   END FUNCTION distance
 
-
+! Ilya M. Sobol algorithm for modeling rnd variables.
   SUBROUTINE sobol(n, node)
-    !@Book{sobolʹ1994a, author = {Sobolʹ, I. M.}, title = {A primer for the
-    !Monte Carlo method}, publisher = {CRC Press}, year = {1994}, address =
-    !{Boca Raton}, isbn = {084938673x} }
     IMPLICIT NONE
+
     ! -- Dummy args
-    integer, Intent(in) :: n
+    INTEGER, INTENT(in) :: n
     TYPE(Nodes), DIMENSION(n), INTENT(out) :: node
 
     ! -- Local variables
     INTEGER :: i
     REAL(wp) :: u, v
     REAL(wp) :: phi, sin_theta, cos_theta
+    REAL(wp), parameter :: s = 2.1123_wp ! Just a scale factor for the radius of the sphere.
 
     ! ---
     DO i = 1, N
@@ -280,9 +279,9 @@ CONTAINS
        cos_theta = 2*u - 1
        sin_theta = SQRT(1 - cos_theta**2)
        phi = 2*pi*v
-       node(i)%x = COS(phi)*SIN_theta
-       node(i)%y = SIN(phi)*SIN_theta
-       node(i)%z = COS_theta
+       node(i)%x = s * COS(phi)*SIN_theta
+       node(i)%y = s * SIN(phi)*SIN_theta
+       node(i)%z = s * COS_theta
     end do
 
   END SUBROUTINE sobol
