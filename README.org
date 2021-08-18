@@ -29,6 +29,7 @@
  prog/ contains the source code, main.f90 and another [[file:prog/CMakeLists.txt][file:~/spheres/prog/CMakeLists.txt]]
  lib/ contains its own [[file:lib/CMakeLists.txt][CMakeLists.txt]] and code that constitute the library of the project.
 
+
 * CMake
 
   $> cmake .

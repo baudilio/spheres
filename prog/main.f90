@@ -1,5 +1,5 @@
 PROGRAM main
-  USE spheretypes, ONLY : PI => sPi, node => snode
+  USE spheretypes, ONLY : PI => sPi, node => snode, atom
   USE algo, ONLY : staffKujilaars
   USE Fibonacci, ONLY : Sphere
   USE bta, ONLY : JORourke
@@ -11,6 +11,8 @@ PROGRAM main
   INTEGER, PARAMETER :: N = 256
   LOGICAL :: aleatory = .TRUE.
   TYPE(node), DIMENSION(N) :: nodes
+  TYPE(atom), DIMENSION(N) :: atoms
+
   INTEGER :: ilun
 
   ! - staffKujilaars method
@@ -50,10 +52,11 @@ PROGRAM main
   CLOSE(ilun)
 
   ! - BTA aleatory distribution method
-  CALL Alea3(N, nodes)
+  CALL Alea3(N, atoms)
   OPEN(Newunit=ilun, FILE="alea3.xyz", Action="Write")
   WRITE(ilun, FMT='(I5/"Aleatory")') n
-  WRITE(ilun, FMT=100) nodes
+  WRITE(ilun, FMT=200) atoms
+
   CLOSE(ilun)
 
   ! - BTA Sobol distribution method
@@ -65,6 +68,7 @@ PROGRAM main
 
 
 100	FORMAT('H ', 3F9.5)
+200	FORMAT(A2, 3F9.5)
   print *, "All Done - Have a Great Day."
   STOP 0
 END PROGRAM main

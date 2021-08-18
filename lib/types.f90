@@ -15,6 +15,15 @@ MODULE spheretypes
     REAL(KIND=DP) :: X, Y, Z
   END TYPE dnode
 
+  TYPE, EXTENDS(snode) :: atoma
+     CHARACTER(Len=1) :: symbol
+  END TYPE atoma
+
+  TYPE :: atom
+     CHARACTER(Len=1) :: symbol
+     REAL(KIND=DP) :: X, Y, Z
+  END TYPE atom
+
 END MODULE spheretypes
 
 Module algo
@@ -161,7 +170,7 @@ end module bta
 
 
 MODULE bta1
-  USE spheretypes, ONLY: wp => SP, nodes => snode, pi => sPI
+  USE spheretypes, ONLY: wp => SP, nodes => snode, pi => sPI, atom
   implicit none
   PRIVATE
   PUBLIC :: alea, alea2, alea3, sobol
@@ -226,14 +235,15 @@ CONTAINS
     implicit none
     ! -- Dummy args
     integer, Intent(in) :: n
-    Type(Nodes), Dimension(n), Intent(out) :: node
+    TYPE(atom), Dimension(n), Intent(out) :: node
 
 
     ! -- Local Variables
     integer :: i
     REAL(wp) :: x,y,z
     REAL(wp) :: d
-    REAL(wp), PARAMETER :: r = 2.11230702051_wp ! (3*pi)^(1/3)
+    REAL(wp), PARAMETER :: r = 0.98474502184_wp ! (3/pi)^(1/3)
+    REAL(wp), PARAMETER :: scale = 10.0_wp
 
     ! ---
 
@@ -244,7 +254,14 @@ CONTAINS
        x = 2*x-1
        y = 2*y-1
        z = 2*z-1
-       d = r / distance(x,y,z)
+       d = distance(x,y,z)
+       IF (d <= r) THEN
+          node(i)%symbol='C'
+       ELSE
+          node(i)%symbol='N'
+       ENDIF
+       d = r / d
+       d = scale*d
        node(i)%x = x*d
        node(i)%y = y*d
        node(i)%z = z*d
@@ -270,7 +287,7 @@ CONTAINS
     INTEGER :: i
     REAL(wp) :: u, v
     REAL(wp) :: phi, sin_theta, cos_theta
-    REAL(wp), parameter :: s = 2.1123_wp ! Just a scale factor for the radius of the sphere.
+    REAL(wp), parameter :: scale = 10.0_wp ! Just a scale factor for the radius of the sphere.
 
     ! ---
     DO i = 1, N
@@ -279,9 +296,9 @@ CONTAINS
        cos_theta = 2*u - 1
        sin_theta = SQRT(1 - cos_theta**2)
        phi = 2*pi*v
-       node(i)%x = s * COS(phi)*SIN_theta
-       node(i)%y = s * SIN(phi)*SIN_theta
-       node(i)%z = s * COS_theta
+       node(i)%x = scale * COS(phi)*SIN_theta
+       node(i)%y = scale * SIN(phi)*SIN_theta
+       node(i)%z = scale * COS_theta
     end do
 
   END SUBROUTINE sobol
