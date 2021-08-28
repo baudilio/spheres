@@ -37,18 +37,48 @@
   $> prog/example.x
 
   In leon, I need to specify the compiler, gfortran, explicitly:
-  $> module load cmake
+  $> module load cmake gcc/10.3.0
   $> cmake -DCMAKE_Fortran_COMPILER=gfortran  .
 
   BTA: see also
 
   $> ccmake .
 
-** Visualize
+Install: the executable is in prog/example.x
+
+I can further install it
+
+$> make install; # defaults to /usr/local/bin
+
+$> make DESTDIR=$PWD install; #creates ${PWD}/usr/local/bin
+
+I want ${PWD}/bin - THEN:
+
+$> cmake -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_INSTALL_PREFIX=$PWD .
+$> make
+$> make install
+
+* Run and visualize
+
+$> bin/example.x
 
 $> module load jmol
 $> jmol alea3.xyz
 
+or use the script file .spt
+
+$> jmol bta.spt
+
+#+begin_src
+# BTA: example bta.spt
+console
+load "alea3.xyz"
+hide bonds
+# hide n*
+# diplay c*
+# BTA: compute and display points proximity, of 'n' labeled points.
+contact {n*} surface
+#+end_src
 
 
 * Download
@@ -90,6 +120,12 @@ $> jmol alea3.xyz
        answers, label(e.g. color) the
        points on the surface of the
        sphere.
+
+       There is indeed a difference on
+       the distribution of the
+       projection of the points outside
+       and inside on the surface of the
+       sphere. See jmol visualization.
 
      - alea4 :: (phi, theta) plus
        the Jacobian of change of the

@@ -8,7 +8,7 @@ PROGRAM main
 
   ! -- Local variables
 
-  INTEGER, PARAMETER :: N = 256
+  INTEGER, PARAMETER :: N = 256 * 4
   LOGICAL :: aleatory = .TRUE.
   TYPE(node), DIMENSION(N) :: nodes
   TYPE(atom), DIMENSION(N) :: atoms
