@@ -8,7 +8,7 @@ PROGRAM main
 
   ! -- Local variables
 
-  INTEGER, PARAMETER :: N = 256 * 4
+  INTEGER, PARAMETER :: N = 60 ! Number of points to distibute on the sphere.
   LOGICAL :: aleatory = .TRUE.
   TYPE(node), DIMENSION(N) :: nodes
   TYPE(atom), DIMENSION(N) :: atoms
