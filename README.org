@@ -1,33 +1,39 @@
 #+TITLE: Distribution of points on the surface of the sphere
 #+SUBTITLE: A self-study case to code develoment, documantation and Git.
 #+AUTHOR: Baudilio Tejerina
+#+STARTUP: overview indent
 
 * Introduction
 
-  This project is merely intended to learn and practice software development techniques using Git
-  version control and Github services.
+  This project is merely intended to learn and practice software development
+  techniques using Git version control and Github services.
 
-  The project consists in the classic distribution of points on the surface of a sphere. References will be provided.
+  The project consists in the classic distribution of points on the surface of a
+  sphere. References will be provided.
 
   I will use Fortran 90 as programming language with the editor Emacs.
 
   Small modification with this line done in TY. (testing only).
 
 
+* Directory structure of the project
+
+The CWD, which is a git repositor, and two subdirectories: prog/ and lib/ In
+addition CWD contains .git/, .dir-locals.el, .gitignore, README.org (this
+file), README.md
+
+For CMake, I've added the file [[file:CMakeLists.txt][CMakeLists.txt]]
+
+The directory =prog= contains the source code, main.f90, (a python version of
+fibonacci.py - Should this be in another place?), and its [[file:prog/CMakeLists.txt][CMakeLists.txt]].
+
+The directory =lib= contains its own [[file:lib/CMakeLists.txt][CMakeLists.txt]] and code that constitute the
+library of the project.
+
+
 * Emacs
 
 ** The directory local variables
-
-
-* Directory structure of the project
-
- The CWD, which is a git repositor, and two subdirectories: prog/ and lib/
- In addition CWD contains .git/, .dir-locals.el, .gitignore, README.org (this file), README.md
-
- For CMake, I've added the file [[file:CMakeLists.txt][CMakeLists.txt]]
-
- prog/ contains the source code, main.f90 and another [[file:prog/CMakeLists.txt][file:~/spheres/prog/CMakeLists.txt]]
- lib/ contains its own [[file:lib/CMakeLists.txt][CMakeLists.txt]] and code that constitute the library of the project.
 
 
 * CMake
@@ -90,45 +96,27 @@ contact {n*} surface
   3. J.O. Rouke
   4. Alearoty
 
-     - alea :: Two RNDs (theta and phi)
-       in [0, pi) and [0, 2pi)
-       respectively.
+     - alea :: Two RNDs (theta and phi) in [0, pi) and [0, 2pi) respectively.
 
-     - alea2 :: Three RNDs (x,y,z) in
-        [-1, 1) and then project, or
-        normalize to the r of the sphere.
+     - alea2 :: Three RNDs (x,y,z) in [-1, 1) and then project, or normalize to
+       the r of the sphere.
 
-     - alea3 :: Similar to alea2 but the
-       sphere, inside the cube of d = 2,
-       divides it in to regions of equal
-       volume. Therefore, its r = cubic
-       root of (3*pi) times d/2. BTA: I
-       don't think there is any
-       difference with alea2. However, I
-       can raise the question, what are
-       the distributions of the
-       projection on the sphere of the
-       points created inside and
-       outside? What is the effect of
-       the information needed and
-       gathered to discriminate the
-       points in this particular way, on
-       the distribution(s)? I need an
-       'if' statement that interrogates
-       the points and with the
-       information obtained through the
-       answers, label(e.g. color) the
-       points on the surface of the
+     - alea3 :: Similar to alea2 but the sphere, inside the cube of d = 2,
+       divides it in to regions of equal volume. Therefore, its r = cubic root
+       of (3*pi) times d/2. BTA: I don't think there is any difference with
+       alea2. However, I can raise the question, what are the distributions of
+       the projection on the sphere of the points created inside and outside?
+       What is the effect of the information needed and gathered to discriminate
+       the points in this particular way, on the distribution(s)? I need an 'if'
+       statement that interrogates the points and with the information obtained
+       through the answers, label(e.g. color) the points on the surface of the
        sphere.
 
-       There is indeed a difference on
-       the distribution of the
-       projection of the points outside
-       and inside on the surface of the
-       sphere. See jmol visualization.
+       There is indeed a difference on the distribution of the projection of the
+       points outside and inside on the surface of the sphere. See jmol
+       visualization.
 
-     - alea4 :: (phi, theta) plus
-       the Jacobian of change of the
+     - alea4 :: (phi, theta) plus the Jacobian of change of the
        coordinates. This is Sobol's methods.
 
      - sobol :: Sobol's method. See page
@@ -146,16 +134,43 @@ isbn = {084938673x},
 }
        #+end_src
 
-The results are written in .xyz files
-     that can be visualized with the
-     molecular visualization tool JMol
+  The results are written in .xyz files that can be visualized with the
+  molecular visualization tool JMol
 
 * Use
+
+Th python version of fibonacci.py is in the directory =prog=. The code was
+obtained from the AI engine gemini. Note it doesn't use rnd numbers like the
+algorithm in the F90 version.
+
+#+begin_src bash
+python3 prog/fibonacci.py > fibo.xyz
+#+end_src
+
+#+RESULTS:
+
+To visualize the points in 3D use the app. jmol:
+#+begin_src bash
+module load jmol
+jmol fibo.xyz
+#+end_src
+
+#+begin_src bash
+XYZ=fibo.xyz
+module load gnu
+graph -Tps -w .6 -h .2 -S 5 .01 \
+      -C -W0 <(awk 'NR > 2 {print $3, $2}' $XYZ) \
+      -C -W0 <(awk 'NR>2 {print $3, $4}' $XYZ) \
+      -C -W0 <(awk 'NR>2 {print $3}' $XYZ) > a.ps
+xdg-open a.ps
+#+end_src
+
+#+RESULTS:
+
 
 * Reference
 
  BTA: Algorithms are from http://web.archive.org/web/20120421191837/http://cgafaq.info/wiki/Evenly_distributed_points_on_sphere
-
 
 
 * Footnotes
